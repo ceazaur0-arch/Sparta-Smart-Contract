@@ -1,22 +1,8 @@
-[package]
-name = "safe_launch"
-version = "0.1.0"
-description = "Anti-sniper and anti-rug token launch program for Solana"
-edition = "2021"
-license = "Apache-2.0"
+[workspace]
+members = ["programs/*"]
+resolver = "2"
 
-[lib]
-crate-type = ["cdylib", "lib"]
-name = "safe_launch"
-
-[features]
-default = []
-cpi = ["no-entrypoint"]
-no-entrypoint = []
-no-idl = []
-no-log-ix-name = []
-idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
-
-[dependencies]
-anchor-lang = "0.30.1"
-anchor-spl = { version = "0.30.1", features = ["metadata"] }
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
